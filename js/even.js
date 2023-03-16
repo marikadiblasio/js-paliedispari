@@ -20,14 +20,18 @@ const btn = document.querySelector('button');
 // Stabiliamo se la somma dei due numeri è pari o dispari (usando una funzione)
 let msg = document.querySelector('h2');
 let evenorodd= '';
-
 btn.addEventListener('click', function (){
+    const userChoice = boxUserChoice.value;
+    if (!userChoice) {
+        document.querySelector('.w-100').innerHTML += `
+        <div class="alert alert-danger">Compila tutti i campi!!!</div>
+        `
+    } else {
     printRndNum()
     evenOdd(sum);
-    const userChoice = boxUserChoice.value;
     let end = (userChoice == evenorodd) ? 'vinto' : 'perso';
-    console.log(userChoice, evenorodd)
     msg.innerHTML = `Hai ${end} questa partita`;
+    }
 });
 //Functions
 function printRndNum(){
@@ -37,7 +41,6 @@ function printRndNum(){
 }
 function addition(){
     const userNum = boxUserNum.value;
-    console.log(userNum);
     sum = parseInt(userNum) + parseInt(rndNum);
     result.innerText = sum;
     return sum
