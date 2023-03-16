@@ -7,9 +7,7 @@
 
 // L’utente sceglie pari o dispari e inserisce un numero da 1 a 5.
 const boxUserChoice = document.getElementById('evenorodd');
-console.dir(boxUserChoice);
 const boxUserNum = document.getElementById('userNum');
-console.dir(boxUserNum);
 let pcNum = document.querySelector('.pcNum');
 let result = document.querySelector('.result');
 // Generiamo un numero random (sempre da 1 a 5) per il computer (usando una funzione).
@@ -22,12 +20,14 @@ let msg = document.querySelector('h2');
 let evenorodd= '';
 btn.addEventListener('click', function (){
     const userChoice = boxUserChoice.value;
-    if (!userChoice) {
+    const userNum = parseInt(boxUserNum.value);
+    if (!userChoice || !userNum || userNum < 1 || userNum > 5) {
         document.querySelector('.w-100').innerHTML += `
-        <div class="alert alert-danger">Compila tutti i campi!!!</div>
+        <div class="alert alert-danger">Compila tutti i campi con dati validi!!!</div>
         `
     } else {
-    printRndNum()
+    printRndNum();
+    addition(userNum, rndNum);
     evenOdd(sum);
     let end = (userChoice == evenorodd) ? 'vinto' : 'perso';
     msg.innerHTML = `Hai ${end} questa partita`;
@@ -39,9 +39,8 @@ function printRndNum(){
     pcNum.innerText = rndNum;
     addition(userNum,rndNum);
 }
-function addition(){
-    const userNum = boxUserNum.value;
-    sum = parseInt(userNum) + parseInt(rndNum);
+function addition(num1,num2){
+    sum = num1 + num2;
     result.innerText = sum;
     return sum
 }
